@@ -1,5 +1,12 @@
+import { Banner } from "../../components/Banner";
+
 export default function Home() {
   return (
-    <h1>Home</h1>
+    <>
+    <Banner />
+    <div class="container">
+      <h1>Build your burger</h1>
+    </div>
+    </>
   )
 }
