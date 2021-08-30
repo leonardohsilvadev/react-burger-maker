@@ -1,0 +1,116 @@
+{
+  "ingredients": {
+    "breads": [
+      {
+        "id": 1,
+        "type": "Italiano Branco"
+      },
+      {
+        "id": 2,
+        "type": "3 Queijos"
+      },
+      {
+        "id": 3,
+        "type": "Parmesão e Orégano"
+      },
+      {
+        "id": 4,
+        "type": "Integral"
+      }
+    ],
+    "meats": [
+      {
+        "id": 1,
+        "type": "Maminha"
+      },
+      {
+        "id": 2,
+        "type": "Alcatra"
+      },
+      {
+        "id": 3,
+        "type": "Picanha"
+      },
+      {
+        "id": 4,
+        "type": "Veggie burger"
+      }
+    ],
+    "optionals": [
+      {
+        "id": 1,
+        "type": "Bacon"
+      },
+      {
+        "id": 2,
+        "type": "Cheddar"
+      },
+      {
+        "id": 3,
+        "type": "Salame"
+      },
+      {
+        "id": 4,
+        "type": "Tomate"
+      },
+      {
+        "id": 4,
+        "type": "Cebola roxa"
+      },
+      {
+        "id": 4,
+        "type": "Pepino"
+      }
+    ]
+  },
+  "status": [
+    {
+      "id": 1,
+      "type": "Requested"
+    },
+    {
+      "id": 2,
+      "type": "Making"
+    },
+    {
+      "id": 3,
+      "type": "Finished"
+    }
+  ],
+  "burgers": [
+    {
+      "name": "Matheus Battisti",
+      "meat": "Picanha",
+      "bread": "Italiano Branco",
+      "optionals": [
+        "Bacon",
+        "Salame",
+        "Cebola roxa"
+      ],
+      "status": "Finished",
+      "id": 1
+    },
+    {
+      "name": "Carlos",
+      "meat": "Maminha",
+      "bread": "Integral",
+      "optionals": [
+        "Bacon",
+        "Pepino"
+      ],
+      "status": "Making",
+      "id": 5
+    },
+    {
+      "name": "Fabio",
+      "meat": "Veggie burger",
+      "bread": "Parmesão e Orégano",
+      "optionals": [
+        "Bacon",
+        "Cheddar"
+      ],
+      "status": "Requested",
+      "id": 6
+    }
+  ]
+}
