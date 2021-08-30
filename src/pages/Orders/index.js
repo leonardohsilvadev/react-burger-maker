@@ -1,5 +1,10 @@
+import { Dashboard } from "../../components";
+
 export default function Orders() {
   return (
-    <h1>Orders</h1>
+    <div class="container">
+      <h1>Manage Orders</h1>
+      <Dashboard />
+    </div>
   )
 }
