@@ -2,11 +2,12 @@ import { Option, Select } from "../BurgerForm/styles";
 import { ActionsContainer, BurgerTable, BurgerTableHeading, BurgerTableRow, BurgerTableRows, Button, Field, ListContainer, ListItem, OrderId, OrderNumber } from "./styles";
 import { api } from '../../utils/api'
 import { useEffect, useState } from "react";
+import { Message } from "../Message";
 
 export const Dashboard = () => {
   const [orders, setOrders] = useState([])
   const [statusData, setStatusData] = useState([])
-  // const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('')
 
   async function getOrders() {
     const url = 'burgers'
@@ -35,7 +36,7 @@ export const Dashboard = () => {
     await api
       .patch(url, data)
       .then(() => {
-        // this.handleMessage(`Order ${id} status succesfully updated!`)
+        handleMessage(`Order ${id} status succesfully updated!`)
         getOrders()
         })
       .catch(err => console.log('err: ', err))
@@ -47,10 +48,17 @@ export const Dashboard = () => {
     await api
       .delete(url)
       .then(() => {
-        // this.handleMessage(`Order ${id} succesfully canceled!`)
+        handleMessage(`Order ${id} succesfully canceled!`)
         getOrders()
         })
       .catch(err => console.log('err: ', err))
+  }
+
+  function handleMessage(text) {
+    setMessage(text)
+    setTimeout(() => {
+      setMessage('')
+    }, 3000)
   }
 
   useEffect(() => {
@@ -60,6 +68,7 @@ export const Dashboard = () => {
 
   return (
     <>
+      {message && <Message message={message} />}
       {orders.map(({ id, name, bread, meat, optionals, status }) => (
         <BurgerTable key={id}>
           <BurgerTableHeading>

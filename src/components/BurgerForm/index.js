@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CheckboxContainer, CheckboxInput, CheckboxTitle, Form, Input, InputContainer, InputLabel, Option, OptionalsContainer, Select, Submit } from "./styles";
 import { api } from '../../utils/api'
+import { Message } from "../Message";
 
 export const BurgerForm = () => {
   const [breads, setBreads] = useState([])
@@ -9,7 +10,7 @@ export const BurgerForm = () => {
   const [name, setName] = useState('')
   const [bread, setBread] = useState('')
   const [meat, setMeat] = useState('')
-  // const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('')
 
   async function getIngredients() {
     const url = 'ingredients'
@@ -42,7 +43,7 @@ export const BurgerForm = () => {
         setBread('')
         setMeat('')
         setOptionals(optionals.map(o => ({ ...o, checked: false })))
-        // this.handleSuccessMessage()
+        handleSuccessMessage()
       })
       .catch(err => console.log('err: ', err))
   }
@@ -62,56 +63,64 @@ export const BurgerForm = () => {
     setOptionals(optionalsCopy)
   }
 
+  function handleSuccessMessage() {
+    setMessage('Order successfully placed')
+    setTimeout(() => {
+      setMessage('')
+    }, 3000)
+  }
+
   useEffect(() => {
     getIngredients()
   }, [])
 
   return (
     <>
-    <Form onSubmit={handleAddBurger}>
-      <InputContainer>
-        <InputLabel>Name</InputLabel>
-        <Input
-          type="text"
-          name="name"
-          value={name}
-          placeholder="Enter your name"
-          onChange={({ target: { value } }) => setName(value)}
-        />
-      </InputContainer>
+      {message && <Message message={message} />}
+      <Form onSubmit={handleAddBurger}>
+        <InputContainer>
+          <InputLabel>Name</InputLabel>
+          <Input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="Enter your name"
+            onChange={({ target: { value } }) => setName(value)}
+          />
+        </InputContainer>
 
-      <InputContainer>
-        <InputLabel>Choose the bread</InputLabel>
-        <Select name="bread" value={bread} onChange={({ target: { value } }) => handleChangeBread(value)}>
-          <Option value=""></Option>
-          {breads.map(({ id, type }) => <Option key={id} value={type}>{type}</Option>)}
-        </Select>
-      </InputContainer>
+        <InputContainer>
+          <InputLabel>Choose the bread</InputLabel>
+          <Select name="bread" value={bread} onChange={({ target: { value } }) => handleChangeBread(value)}>
+            <Option value=""></Option>
+            {breads.map(({ id, type }) => <Option key={id} value={type}>{type}</Option>)}
+          </Select>
+        </InputContainer>
 
-      <InputContainer>
-        <InputLabel>Choose the meat</InputLabel>
-        <Select name="meat" value={meat} onChange={(({ target: { value } }) => handleChangeMeat(value))}>
-          <Option value=""></Option>
-          {meats.map(({ id, type }) => <Option key={id} value={type}>{type}</Option>)}
-        </Select>
-      </InputContainer>
+        <InputContainer>
+          <InputLabel>Choose the meat</InputLabel>
+          <Select name="meat" value={meat} onChange={(({ target: { value } }) => handleChangeMeat(value))}>
+            <Option value=""></Option>
+            {meats.map(({ id, type }) => <Option key={id} value={type}>{type}</Option>)}
+          </Select>
+        </InputContainer>
 
-      <InputContainer>
-        <InputLabel>Choose the optionals</InputLabel>
-        <OptionalsContainer>
-        {optionals.map(({ id, type, checked }, index) => (
-          <CheckboxContainer key={id} onClick={() => handleCheckOptional(index)}>
-            <CheckboxInput type="checkbox" name={type} value={type} checked={checked} readOnly />
-            <CheckboxTitle>{type}</CheckboxTitle>
-          </CheckboxContainer>
-        ))}
-        </OptionalsContainer>
-      </InputContainer>
+        <InputContainer>
+          <InputLabel>Choose the optionals</InputLabel>
+          <OptionalsContainer>
+          {optionals.map(({ id, type, checked }, index) => (
+            <CheckboxContainer key={id} onClick={() => handleCheckOptional(index)}>
+              <CheckboxInput type="checkbox" name={type} value={type} checked={checked} readOnly />
+              <CheckboxTitle>{type}</CheckboxTitle>
+            </CheckboxContainer>
+          ))}
+          </OptionalsContainer>
+        </InputContainer>
 
-      <InputContainer>
-        <Submit type="submit" value="place order" />
-      </InputContainer>
-    </Form>
-  </>
+        <InputContainer>
+          <Submit type="submit" value="place order" />
+        </InputContainer>
+      </Form>
+    </>
   )
 }
